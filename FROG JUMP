@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+int dp[100001];
+int frog(int idx,int A[],int n)
+{
+    if(idx==n-1) return 0;
+    if(dp[n]!=-1) return dp[n];
+    int left=abs(A[idx]-A[idx+1])+frog(idx+1,A,n);
+    int right=INT_MAX;
+    if(idx+2<=n-1)
+    {
+        right=abs(A[idx]-A[idx+2])+frog(idx+2,A,n);
+    }
+    return min(left,right);
+}
+int main()
+{
+    int n;
+    cin >> n;
+    int A[n];
+    memset(dp,-1,sizeof(dp));
+    for(int i=0;i<n;i++)
+    {
+        cin>>A[i];
+    }
+    cout<<frog(0,A,n);
+}
+
+
+
